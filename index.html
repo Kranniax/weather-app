@@ -18,6 +18,7 @@
     />
   </head>
   <body>
+    <!-- Weather Dashboard Header -->
     <header>
       <nav class="navbar bg-body-tertiary bg-primary">
         <div class="container-fluid justify-content-center">
@@ -25,20 +26,53 @@
         </div>
       </nav>
     </header>
+    <!-- Main Weather Section  -->
     <main id="weather" class="row">
+      <!-- Search a City  -->
       <section class="search-container col border border-secondary">
         <div>
           <h2>Search for a City:</h2>
-          <input type="text" name="city" id="city-input" />
+          <input type="text" name="city" id="city-input" class="form-control" />
+          <button type="button" class="btn btn-primary mt-4" >Search</button>
         </div>
-        <div>
+        <div class="mt-3">
           <h4>Search History:</h4>
           <div class="search-history-container"></div>
         </div>
       </section>
-      <section class="weather-container col border border-secondary">
-        <section class="current-weather-container"></section>
-        <section class="five-day-container"></section>
+
+      <!-- Weather Forecast -->
+      <section
+        class="weather-container col border border-secondary flex-column"
+      >
+        <!-- Current Weather  -->
+        <div class="current-weather-container col">
+          <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                Card subtitle
+              </h6>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+        <!-- Five Day Forcast -->
+        <div class="five-day-container col row">
+          <div class="card" style="width: 18rem col">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
       </section>
     </main>
 
