@@ -25,15 +25,20 @@
         </div>
       </nav>
     </header>
-    <main id="weather">
-      <section class="search-container">
+    <main id="weather" class="row">
+      <section class="search-container col border border-secondary">
         <div>
-          <h2>
-          </h2>
+          <h2>Search for a City:</h2>
+          <input type="text" name="city" id="city-input" />
+        </div>
+        <div>
+          <h4>Search History:</h4>
+          <div class="search-history-container"></div>
         </div>
       </section>
-      <section class="weather-container">
-
+      <section class="weather-container col border border-secondary">
+        <section class="current-weather-container"></section>
+        <section class="five-day-container"></section>
       </section>
     </main>
 
