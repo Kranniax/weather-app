@@ -13,7 +13,7 @@ var geoCoding = function (searchedCity) {
 
 // Using the One Call API 3.0 search for the Citie's current and five day forcast.
 var citySearch = function (data) {
- console.log(data);
+ console.log(data[0].lat, data[0].lon);
 };
 
 var formHandler = function (e) {
