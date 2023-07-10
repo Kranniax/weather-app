@@ -13,7 +13,19 @@ var geoCoding = function (searchedCity) {
 
 // Using the One Call API 3.0 search for the Citie's current and five day forcast.
 var citySearch = function (data) {
- console.log(data[0].lat, data[0].lon);
+  //  console.log(, data[0].lon);
+
+  fetch(
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      data[0].lat +
+      "&lon=" +
+      data[0].lon +
+      "&exclude={part}&units=imperial&appid=379d1420e9fea3af7ba71fd81914bc2f"
+  ).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  });
 };
 
 var formHandler = function (e) {
