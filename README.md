@@ -15,7 +15,7 @@ A weather application that allows a user to search for a city and it's weather c
 
 ## Deployed Website
 
-<https://kranniax.github.io/git-it-done/>
+<https://kranniax.github.io/weather-app/>
 
 ## Contributions
 
