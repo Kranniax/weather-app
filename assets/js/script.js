@@ -53,8 +53,33 @@ var currentWeather = function (data, city) {
   cardSubtitle.classList.add("card-subtitle", "mb-2", "text-body-secondary");
   cardSubtitle.textContent = "Current Weather";
 
+  var weatherDetailsContainer = document.createElement("ul");
+  weatherDetailsContainer.classList.add("list-group");
+
+  var tempDetail = document.createElement("li");
+  tempDetail.classList.add("border-0", "list-group-item", "ps-0");
+  tempDetail.innerHTML = "Temp: " + data.current.temp + "°F";
+
+  var windDetail = document.createElement("li");
+  windDetail.classList.add("list-group-item", "border-0");
+  windDetail.innerHTML = "Wind: " + data.current.wind_speed + " MPH";
+
+  var humidityDetail = document.createElement("li");
+  humidityDetail.classList.add("list-group-item", "border-0");
+  humidityDetail.innerHTML = "Humidity: " + data.current.humidity + "%";
+
+  var uVDetail = document.createElement("li");
+  uVDetail.classList.add("list-group-item", "border-0");
+  uVDetail.innerHTML = "UV Index: " + data.current.uvi;
+
+  weatherDetailsContainer.appendChild(tempDetail);
+  weatherDetailsContainer.appendChild(windDetail);
+  weatherDetailsContainer.appendChild(humidityDetail);
+  weatherDetailsContainer.appendChild(uVDetail);
+
   cardBodyEl.appendChild(cardTitleEl);
   cardBodyEl.appendChild(cardSubtitle);
+  cardBodyEl.appendChild(weatherDetailsContainer);
   cardContainerEl.appendChild(cardBodyEl);
   currentWeatherContainerEl.appendChild(cardContainerEl);
 };
@@ -78,6 +103,8 @@ var saveCity = function (city) {
 var formHandler = function (e) {
   e.preventDefault();
   var cityInput = document.querySelector("#city-input").value.trim();
+  cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
+  
   // store in localStorage.
   saveCity(cityInput);
   //weather template
