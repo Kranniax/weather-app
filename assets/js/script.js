@@ -56,22 +56,42 @@ var currentWeather = function (data, city) {
   var weatherDetailsContainer = document.createElement("ul");
   weatherDetailsContainer.classList.add("list-group");
 
+  var tempIconContainer = document.createElement("li");
+  tempIconContainer.classList.add(
+    "border-0",
+    "list-group-item",
+    "padding-left"
+  );
+
+  var tempIcon = document.createElement("img");
+  tempIcon.setAttribute(
+    "src",
+    "https://openweathermap.org/img/wn/" +
+      data.current.weather[0].icon +
+      "@2x.png"
+  );
+  tempIconContainer.appendChild(tempIcon);
+
   var tempDetail = document.createElement("li");
-  tempDetail.classList.add("border-0", "list-group-item", "ps-0");
+  tempDetail.classList.add("border-0", "list-group-item", "padding-left");
   tempDetail.innerHTML = "Temp: " + data.current.temp + "°F";
 
+  tempIconContainer.appendChild(tempIcon);
+  tempDetail.appendChild(tempIconContainer);
+
   var windDetail = document.createElement("li");
-  windDetail.classList.add("list-group-item", "border-0");
+  windDetail.classList.add("list-group-item", "border-0", "padding-left");
   windDetail.innerHTML = "Wind: " + data.current.wind_speed + " MPH";
 
   var humidityDetail = document.createElement("li");
-  humidityDetail.classList.add("list-group-item", "border-0");
+  humidityDetail.classList.add("list-group-item", "border-0", "padding-left");
   humidityDetail.innerHTML = "Humidity: " + data.current.humidity + "%";
 
   var uVDetail = document.createElement("li");
-  uVDetail.classList.add("list-group-item", "border-0");
+  uVDetail.classList.add("list-group-item", "border-0", "padding-left");
   uVDetail.innerHTML = "UV Index: " + data.current.uvi;
 
+  weatherDetailsContainer.appendChild(tempIconContainer);
   weatherDetailsContainer.appendChild(tempDetail);
   weatherDetailsContainer.appendChild(windDetail);
   weatherDetailsContainer.appendChild(humidityDetail);
@@ -104,7 +124,7 @@ var formHandler = function (e) {
   e.preventDefault();
   var cityInput = document.querySelector("#city-input").value.trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
-  
+
   // store in localStorage.
   saveCity(cityInput);
   //weather template
