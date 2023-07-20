@@ -16,6 +16,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <!-- Personal CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
   <body>
@@ -30,9 +31,9 @@
     <!-- Main Weather Section  -->
     <main id="weather" class="row mt-4">
       <!-- Search a City  -->
-      <section class="search-container col border border-secondary">
+      <section class="search-container col-2 border border-secondary">
         <div>
-          <h2>Search for a City:</h2>
+          <h2>Search a City:</h2>
           <form id="search-form">
             <input
               type="text"
@@ -51,21 +52,12 @@
 
       <!-- Weather Forecast -->
       <section
-        class="weather-container col border border-secondary flex-column"
+        class="weather-container col-8 border border-secondary flex-column"
       >
         <!-- Current Weather  -->
         <div class="current-weather-container col"></div>
         <!-- Five Day Forcast -->
-        <div class="five-day-container col row">
-          <!-- <div class="card" style="width: 18rem col">
-            <img src="..." class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div> -->
-        </div>
+        <div class="five-day-container col row"></div>
       </section>
     </main>
 
@@ -85,6 +77,11 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <script src="./assets/js/script.js"></script>
   </body>
