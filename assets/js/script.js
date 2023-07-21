@@ -53,10 +53,6 @@ var currentWeather = function (data, city) {
   cardTitleEl.classList.add("card-title");
   cardTitleEl.innerHTML = city + " - " + time;
 
-  // var cardSubtitle = document.createElement("h6");
-  // cardSubtitle.classList.add("card-subtitle", "mb-2", "text-body-secondary");
-  // cardSubtitle.textContent = "Current Weather";
-
   // a list group to display the temp, wind, humidity and uv index.
   var weatherDetailsContainer = document.createElement("ul");
   weatherDetailsContainer.classList.add("list-group");
@@ -134,6 +130,7 @@ var fiveDayForecast = function (data) {
   fiveDayForecastContainerEl.innerHTML = "";
 
   for (var i = 0; i < data.daily.length - 3; i++) {
+    var counter = 0;
     // card container to hold weather details.
     var cardContainerEl = document.createElement("div");
     cardContainerEl.classList.add("card", "col");
@@ -149,16 +146,12 @@ var fiveDayForecast = function (data) {
         "@2x.png"
     );
 
-    // Five day time frame. 
-    // var fiveDayTime = moment().format("L");
-    
-    // fiveDayTime.add(1, 'days'); 
-    // console.log(fiveDayTime);
-
     // card title for the searched city.
     var cardTitleEl = document.createElement("h5");
     cardTitleEl.classList.add("card-title");
-    cardTitleEl.textContent = "Test";
+    cardTitleEl.textContent = moment()
+      .add(i + 1, "days")
+      .format("L");
 
     // card body to include the title and body content.
     var cardBodyEl = document.createElement("div");
@@ -218,6 +211,8 @@ var formHandler = function (e) {
 
   // use fetch api to find weather details.
   geoCoding(cityInput);
+  // clear input field after submit.
+  document.querySelector("#city-input").value = "";
 };
 
 document.querySelector("#search-form").addEventListener("submit", formHandler);
