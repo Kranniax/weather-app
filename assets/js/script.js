@@ -1,7 +1,9 @@
 var currentWeatherContainerEl = document.querySelector(
   ".current-weather-container"
 );
-var fiveDayForecastContainerEl = document.querySelector(".five-day-container");
+var fiveDayForecastContainerEl = document.querySelector(
+  ".five-day-container .row"
+);
 var searchedCities = [];
 
 // Fetch geographic coordinates [lat, lon] by using name of location (city name or area name).
@@ -129,11 +131,13 @@ var fiveDayForecast = function (data) {
   // clear old weather data first.
   fiveDayForecastContainerEl.innerHTML = "";
 
+  var fiveDayTitle = document.createElement("h3");
+  // fiveDayTitle.textContent = "Five Day Forecast";
+
   for (var i = 0; i < data.daily.length - 3; i++) {
-    var counter = 0;
     // card container to hold weather details.
     var cardContainerEl = document.createElement("div");
-    cardContainerEl.classList.add("card", "col");
+    cardContainerEl.classList.add("card", "col", "m-3");
     cardContainerEl.setAttribute("style", "width: 18rem");
 
     // weather icon
@@ -148,10 +152,8 @@ var fiveDayForecast = function (data) {
 
     // card title for the searched city.
     var cardTitleEl = document.createElement("h5");
-    cardTitleEl.classList.add("card-title");
-    cardTitleEl.textContent = moment()
-      .add(i + 1, "days")
-      .format("L");
+    cardTitleEl.classList.add("card-title", "pl-3");
+    cardTitleEl.textContent = moment.unix(data.daily[i].dt).format("L");
 
     // card body to include the title and body content.
     var cardBodyEl = document.createElement("div");

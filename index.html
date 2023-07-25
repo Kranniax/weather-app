@@ -29,8 +29,9 @@
       </nav>
     </header>
     <!-- Main Weather Section  -->
-    <main id="weather" class="row mt-4">
-      <!-- Search a City  -->
+    <main id="weather" class="container-fluid mt-4">
+      <div class="row">
+        <!-- Search a City  -->
       <section class="search-container col-2 border border-secondary">
         <div>
           <h2>Search a City:</h2>
@@ -41,7 +42,9 @@
               id="city-input"
               class="form-control"
             />
-            <button type="submit" class="btn btn-primary d-block mt-4 mx-auto">Search</button>
+            <button type="submit" class="btn btn-primary d-block mt-4 mx-auto">
+              Search
+            </button>
           </form>
         </div>
         <div class="mt-3">
@@ -51,15 +54,18 @@
       </section>
 
       <!-- Weather Forecast -->
-      <section
-        class="weather-container col-8 border border-secondary flex-column"
-      >
-        <!-- Current Weather  -->
-        <div class="current-weather-container col"></div>
-        <!-- Five Day Forcast -->
-        <div class="five-day-container col row">
+      <section class="weather-container col-8 border border-secondary">
+        <div class="flex-column">
+          <!-- Current Weather  -->
+          <div class="current-weather-container col mb-3"></div>
+          <!-- Five Day Forcast -->
+          <div class="five-day-container col mb-3">
+            <di class="row"></div>
+          </div>
         </div>
       </section>
+      </div>
+      
     </main>
 
     <!-- Optional JavaScript -->
