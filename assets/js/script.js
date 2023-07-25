@@ -4,6 +4,7 @@ var currentWeatherContainerEl = document.querySelector(
 var fiveDayForecastContainerEl = document.querySelector(
   ".five-day-container .row"
 );
+var fiveDaySectionTitle = document.querySelector(".five-day-container h4");
 var searchedCities = [];
 
 // Fetch geographic coordinates [lat, lon] by using name of location (city name or area name).
@@ -130,6 +131,10 @@ var currentWeather = function (data, city) {
 var fiveDayForecast = function (data) {
   // clear old weather data first.
   fiveDayForecastContainerEl.innerHTML = "";
+
+  // show five day forcast section title. 
+  fiveDaySectionTitle.classList.replace("d-none", "d-block");
+  
 
   var fiveDayTitle = document.createElement("h3");
   // fiveDayTitle.textContent = "Five Day Forecast";
