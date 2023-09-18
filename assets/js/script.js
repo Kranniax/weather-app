@@ -132,9 +132,8 @@ var fiveDayForecast = function (data) {
   // clear old weather data first.
   fiveDayForecastContainerEl.innerHTML = "";
 
-  // show five day forcast section title. 
+  // show five day forecast section title.
   fiveDaySectionTitle.classList.replace("d-none", "d-block");
-  
 
   var fiveDayTitle = document.createElement("h3");
   // fiveDayTitle.textContent = "Five Day Forecast";
@@ -206,11 +205,12 @@ var saveCity = function (city) {
     localStorage.setItem("cities", JSON.stringify(searchedCities));
   }
 };
+// var loadCity = function () {};
 
 // Extract the search city name from input form.
 var formHandler = function (e) {
   e.preventDefault();
-  var cityInput = document.querySelector("#city-input").value.trim();
+  var cityInput = $("#city-input").val().trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
 
   // store in localStorage.
@@ -218,8 +218,10 @@ var formHandler = function (e) {
 
   // use fetch api to find weather details.
   geoCoding(cityInput);
+
   // clear input field after submit.
-  document.querySelector("#city-input").value = "";
+  $("#city-input").val("");
 };
 
-document.querySelector("#search-form").addEventListener("submit", formHandler);
+$("#search-form").on("submit", formHandler);
+// loadCity();
