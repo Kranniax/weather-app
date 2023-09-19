@@ -38,34 +38,23 @@ var citySearch = function (data, city) {
 // showcase the current weather conditions.
 var currentWeather = function (data, city) {
   // clear old weather data first.
-  currentWeatherContainerEl.innerHTML = "";
-
+  $(".current-weather-container").empty();
+ 
   // card container to hold weather details.
-  var cardContainerEl = document.createElement("div");
-  cardContainerEl.classList.add("card");
-  cardContainerEl.setAttribute("style", "width: 18rem");
+  var cardContainerEl = $("<div>").addClass("card").attr("style", "width: 18rem");
 
   // card body to include the title and body content.
-  var cardBodyEl = document.createElement("div");
-  cardBodyEl.classList.add("card-body");
+  var cardBodyEl = $("<div>").addClass("card-body");
 
   var time = moment().format("L");
 
   // card title for the searched city.
-  var cardTitleEl = document.createElement("h5");
-  cardTitleEl.classList.add("card-title");
-  cardTitleEl.innerHTML = city + " - " + time;
+  var cardTitleEl = $("<h5>").addClass("card-title").html(city + " - " + time);
 
   // a list group to display the temp, wind, humidity and uv index.
-  var weatherDetailsContainer = document.createElement("ul");
-  weatherDetailsContainer.classList.add("list-group");
+  var weatherDetailsContainer = $("<ul>").addClass("list-group");
 
-  var tempIconContainer = document.createElement("li");
-  tempIconContainer.classList.add(
-    "border-0",
-    "list-group-item",
-    "padding-left"
-  );
+  var tempIconContainer = $("<li>").addClass("border-0 list-group-item padding-left");
 
   var tempIcon = document.createElement("img");
   tempIcon.setAttribute(
