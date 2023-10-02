@@ -1,6 +1,4 @@
-var currentWeatherContainerEl = document.querySelector(
-  ".current-weather-container"
-);
+var currentWeatherContainerEl = $(".current-weather-container");
 var fiveDayForecastContainerEl = document.querySelector(
   ".five-day-container .row"
 );
@@ -39,82 +37,81 @@ var citySearch = function (data, city) {
 var currentWeather = function (data, city) {
   // clear old weather data first.
   $(".current-weather-container").empty();
- 
-  // card container to hold weather details.
-  var cardContainerEl = $("<div>").addClass("card").attr("style", "width: 18rem");
 
+  // card container to hold weather details.
+  var cardContainerEl = $("<div>")
+    .addClass("card")
+    .attr("style", "width: 18rem");
   // card body to include the title and body content.
   var cardBodyEl = $("<div>").addClass("card-body");
 
   var time = moment().format("L");
 
   // card title for the searched city.
-  var cardTitleEl = $("<h5>").addClass("card-title").html(city + " - " + time);
+  var cardTitleEl = $("<h5>")
+    .addClass("card-title")
+    .html(city + " - " + time);
 
   // a list group to display the temp, wind, humidity and uv index.
   var weatherDetailsContainer = $("<ul>").addClass("list-group");
 
-  var tempIconContainer = $("<li>").addClass("border-0 list-group-item padding-left");
+  // a container to hold temperature icon
+  var tempIconContainer = $("<li>").addClass(
+    "border-0 list-group-item padding-left"
+  );
 
-  var tempIcon = document.createElement("img");
-  tempIcon.setAttribute(
+  var tempIcon = $("<img>").attr(
     "src",
     "https://openweathermap.org/img/wn/" +
       data.current.weather[0].icon +
       "@2x.png"
   );
 
-  tempIconContainer.appendChild(tempIcon);
+  tempIconContainer.append(tempIcon);
 
   // current weather temperature
-  var tempDetail = document.createElement("li");
-  tempDetail.classList.add("border-0", "list-group-item", "padding-left");
-  tempDetail.innerHTML = "Temp: " + data.current.temp + "°F";
-
-  // append weather temperature & weather temperature icon
-  tempIconContainer.appendChild(tempIcon);
-  tempDetail.appendChild(tempIconContainer);
+  var tempDetail = $("<li>")
+    .addClass("border-0 list-group-item padding-left")
+    .html("Temp: " + data.current.temp + "°F");
 
   // current wind speed
-  var windDetail = document.createElement("li");
-  windDetail.classList.add("list-group-item", "border-0", "padding-left");
-  windDetail.innerHTML = "Wind: " + data.current.wind_speed + " MPH";
+  var windDetail = $("<li>")
+    .addClass("list-group-item border-0 padding-left")
+    .html("Wind: " + data.current.wind_speed + " MPH");
 
   // current humidty percentage
-  var humidityDetail = document.createElement("li");
-  humidityDetail.classList.add("list-group-item", "border-0", "padding-left");
-  humidityDetail.innerHTML = "Humidity: " + data.current.humidity + "%";
+  var humidityDetail = $("<li>")
+    .addClass("list-group-item border-0 padding-left")
+    .html("Humidity: " + data.current.humidity + "%");
 
   // current uv index.
-  var uVDetail = document.createElement("li");
-  uVDetail.classList.add("list-group-item", "border-0", "padding-left");
-  uVDetail.textContent = "UV Index: ";
-  var uvIndexButton = document.createElement("button");
-  uvIndexButton.textContent = data.current.uvi;
+  var uVDetail = $("<li>")
+    .addClass("list-group-item border-0 padding-left")
+    .text("UV Index: ");
+  var uvIndexButton = $("<button>").text(data.current.uvi);
 
   // check uvi heat ranges
   if (data.current.uvi < 3) {
-    uvIndexButton.classList.add("btn", "btn-success", "btn-sm", "uvi-padding");
+    uvIndexButton.addClass("btn btn-success btn-sm uvi-padding");
   } else if (data.current.uvi < 7) {
-    uvIndexButton.classList.add("btn", "btn-warning", "btn-sm", "uvi-padding");
+    uvIndexButton.addClass("btn btn-warning btn-sm uvi-padding");
   } else {
-    uvIndexButton.classList.add("btn", "btn-danger", "btn-sm", "uvi-padding");
+    uvIndexButton.addClass("btn btn-danger btn-sm uvi-padding");
   }
-  uVDetail.appendChild(uvIndexButton);
-
-  // append all child elements to weather details container.
-  weatherDetailsContainer.appendChild(tempIconContainer);
-  weatherDetailsContainer.appendChild(tempDetail);
-  weatherDetailsContainer.appendChild(windDetail);
-  weatherDetailsContainer.appendChild(humidityDetail);
-  weatherDetailsContainer.appendChild(uVDetail);
+  uVDetail.append(uvIndexButton);
+  // append all weather details under one weather container.
+  weatherDetailsContainer.append(
+    tempIconContainer,
+    tempDetail,
+    windDetail,
+    humidityDetail,
+    uVDetail
+  );
 
   // append all card sections to main element.
-  cardBodyEl.appendChild(cardTitleEl);
-  // cardBodyEl.appendChild(cardSubtitle);
-  cardBodyEl.appendChild(weatherDetailsContainer);
-  cardContainerEl.appendChild(cardBodyEl);
-  currentWeatherContainerEl.appendChild(cardContainerEl);
+  cardBodyEl.append(cardTitleEl, weatherDetailsContainer);
+  cardContainerEl.append(cardBodyEl);
+  currentWeatherContainerEl.append(cardContainerEl);
 };
 // showcase the five day weather conditions.
 var fiveDayForecast = function (data) {
