@@ -1,7 +1,5 @@
 var currentWeatherContainerEl = $(".current-weather-container");
-var fiveDayForecastContainerEl = document.querySelector(
-  ".five-day-container .row"
-);
+var fiveDayForecastContainerEl = $(".five-day-container .row");
 var fiveDaySectionTitle = document.querySelector(".five-day-container h4");
 var searchedCities = [];
 
@@ -116,68 +114,58 @@ var currentWeather = function (data, city) {
 // showcase the five day weather conditions.
 var fiveDayForecast = function (data) {
   // clear old weather data first.
-  fiveDayForecastContainerEl.innerHTML = "";
+  $(".five-day-container .row").html("");
 
   // show five day forecast section title.
   fiveDaySectionTitle.classList.replace("d-none", "d-block");
 
-  var fiveDayTitle = document.createElement("h3");
-  // fiveDayTitle.textContent = "Five Day Forecast";
-
   for (var i = 0; i < data.daily.length - 3; i++) {
     // card container to hold weather details.
-    var cardContainerEl = document.createElement("div");
-    cardContainerEl.classList.add("card", "col", "m-3");
-    cardContainerEl.setAttribute("style", "width: 18rem");
+    var cardContainerEl = $("<div>")
+      .addClass("card col m-3")
+      .attr("style", "width: 18rem");
 
     // weather icon
-    var weatherImage = document.createElement("img");
-    weatherImage.classList.add("card-img-top");
-    weatherImage.setAttribute(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        data.daily[i].weather[0].icon +
-        "@2x.png"
-    );
+    var weatherImage = $("<img>")
+      .addClass("card-img-top")
+      .attr(
+        "src",
+        "https://openweathermap.org/img/wn/" +
+          data.daily[i].weather[0].icon +
+          "@2x.png"
+      );
 
     // card title for the searched city.
-    var cardTitleEl = document.createElement("h5");
-    cardTitleEl.classList.add("card-title", "pl-3");
-    cardTitleEl.textContent = moment.unix(data.daily[i].dt).format("L");
+    var cardTitleEl = $("<h5>")
+      .addClass("card-title pl-3")
+      .text(moment.unix(data.daily[i].dt).format("L"));
 
     // card body to include the title and body content.
-    var cardBodyEl = document.createElement("div");
-    cardBodyEl.classList.add("card-body");
+    var cardBodyEl = $("<div>").addClass("card-body");
 
     // a list group to display the temp, wind, humidity and uv index.
-    var weatherDetailsContainer = document.createElement("ul");
-    weatherDetailsContainer.classList.add("list-group");
+    var weatherDetailsContainer = $("<ul>").addClass("list-group");
 
     // current weather temperature
-    var tempDetail = document.createElement("li");
-    tempDetail.classList.add("border-0", "list-group-item", "padding-left");
-    tempDetail.innerHTML = "Temp: " + data.daily[i].temp.day + "°F";
+    var tempDetail = $("<li>")
+      .addClass("border-0 list-group-item padding-left")
+      .html("Temp: " + data.daily[i].temp.day + "°F");
 
     // current wind speed
-    var windDetail = document.createElement("li");
-    windDetail.classList.add("list-group-item", "border-0", "padding-left");
-    windDetail.innerHTML = "Wind: " + data.daily[i].wind_speed + " MPH";
+    var windDetail = $("<li>")
+      .addClass("list-group-item border-0 padding-left")
+      .html("Wind: " + data.daily[i].wind_speed + " MPH");
 
     // current humidty percentage
-    var humidityDetail = document.createElement("li");
-    humidityDetail.classList.add("list-group-item", "border-0", "padding-left");
-    humidityDetail.innerHTML = "Humidity: " + data.daily[i].humidity + "%";
+    var humidityDetail = $("<li>")
+      .addClass("list-group-item border-0 padding-left")
+      .html("Humidity: " + data.daily[i].humidity + "%");
 
-    weatherDetailsContainer.appendChild(tempDetail);
-    weatherDetailsContainer.appendChild(windDetail);
-    weatherDetailsContainer.appendChild(humidityDetail);
-    cardBodyEl.appendChild(weatherDetailsContainer);
-
-    cardContainerEl.appendChild(weatherImage);
-    cardContainerEl.appendChild(cardTitleEl);
-    cardContainerEl.appendChild(cardBodyEl);
-
-    fiveDayForecastContainerEl.appendChild(cardContainerEl);
+    // append all card sections to main element.
+    weatherDetailsContainer.append(tempDetail, windDetail, humidityDetail);
+    cardBodyEl.append(weatherDetailsContainer);
+    cardContainerEl.append(weatherImage, cardTitleEl, cardBodyEl);
+    fiveDayForecastContainerEl.append(cardContainerEl);
   }
 };
 
