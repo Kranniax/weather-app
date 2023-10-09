@@ -168,7 +168,7 @@ var fiveDayForecast = function (data) {
     fiveDayForecastContainerEl.append(cardContainerEl);
   }
 };
-
+// Save searched cites within localStorage API.
 var saveCity = function (city) {
   if (localStorage.getItem("cities") === null) {
     searchedCities.push(city);
@@ -179,7 +179,10 @@ var saveCity = function (city) {
     localStorage.setItem("cities", JSON.stringify(searchedCities));
   }
 };
-// var loadCity = function () {};
+var loadCity = function () {
+  var savedCities = JSON.parse(localStorage.getItem("cities"));
+  console.log(savedCities);
+};
 
 // Extract the search city name from input form.
 var formHandler = function (e) {
@@ -198,4 +201,4 @@ var formHandler = function (e) {
 };
 
 $("#search-form").on("submit", formHandler);
-// loadCity();
+loadCity();
