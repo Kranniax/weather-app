@@ -70,12 +70,12 @@ var currentWeather = function (data, city) {
   // current weather temperature
   var tempDetail = $("<li>")
     .addClass("border-0 list-group-item padding-left")
-    .html("Temp: " + data.current.temp + "°F");
+    .html("Temp: " + Math.round(data.current.temp) + "°F");
 
   // current wind speed
   var windDetail = $("<li>")
     .addClass("list-group-item border-0 padding-left")
-    .html("Wind: " + data.current.wind_speed + " MPH");
+    .html("Wind: " + Math.round(data.current.wind_speed) + " MPH");
 
   // current humidty percentage
   var humidityDetail = $("<li>")
@@ -149,12 +149,12 @@ var fiveDayForecast = function (data) {
     // current weather temperature
     var tempDetail = $("<li>")
       .addClass("border-0 list-group-item padding-left")
-      .html("Temp: " + data.daily[i].temp.day + "°F");
+      .html("Daily Temp: " + Math.round(data.daily[i].temp.day) + "°F");
 
     // current wind speed
     var windDetail = $("<li>")
       .addClass("list-group-item border-0 padding-left")
-      .html("Wind: " + data.daily[i].wind_speed + " MPH");
+      .html("Wind: " + Math.round(data.daily[i].wind_speed) + " MPH");
 
     // current humidty percentage
     var humidityDetail = $("<li>")
@@ -180,13 +180,20 @@ var saveCity = function (city) {
   }
 };
 var loadCity = function () {
-  var savedCities = JSON.parse(localStorage.getItem("cities"));
-  console.log(savedCities);
+  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+  
+  for ( var i = 0; i < savedCities.length; i++){
+    var searchHistoryBtn = $("<button>")
+      .text(savedCities[i])
+      .attr("value", savedCities[i])
+      .addClass("btn-primary");
+    $(".search-history-container").append(searchHistoryBtn);
+  }
 };
 
 // Extract the search city name from input form.
 var formHandler = function (e) {
-  e.preventDefault();
+  // e.preventDefault();
   var cityInput = $("#city-input").val().trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
 
@@ -200,5 +207,5 @@ var formHandler = function (e) {
   $("#city-input").val("");
 };
 
-$("#search-form").on("submit", formHandler);
+$("#search-form").on("click", formHandler);
 loadCity();
