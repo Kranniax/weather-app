@@ -181,19 +181,19 @@ var saveCity = function (city) {
 };
 var loadCity = function () {
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
-  
+  console.log(savedCities);
   for ( var i = 0; i < savedCities.length; i++){
     var searchHistoryBtn = $("<button>")
       .text(savedCities[i])
       .attr("value", savedCities[i])
-      .addClass("btn-primary");
+      .addClass("btn btn-primary");
     $(".search-history-container").append(searchHistoryBtn);
   }
 };
 
 // Extract the search city name from input form.
 var formHandler = function (e) {
-  // e.preventDefault();
+  e.preventDefault();
   var cityInput = $("#city-input").val().trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
 
@@ -207,5 +207,5 @@ var formHandler = function (e) {
   $("#city-input").val("");
 };
 
-$("#search-form").on("click", formHandler);
+$("#search-form button").on("click", formHandler);
 loadCity();
