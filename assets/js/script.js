@@ -180,14 +180,20 @@ var saveCity = function (city) {
   }
 };
 var loadCity = function () {
-  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
-  console.log(savedCities);
-  for ( var i = 0; i < savedCities.length; i++){
+  searchedCities = JSON.parse(localStorage.getItem("cities")) || [];
+  // console.log(savedCities);
+  for (var i = 0; i < searchedCities.length; i++) {
+    var searchedHistoryList = $("<li>").addClass(
+      "mt-1 list-group-item border-0"
+    );
     var searchHistoryBtn = $("<button>")
-      .text(savedCities[i])
-      .attr("value", savedCities[i])
+      .text(searchedCities[i])
+      .attr("value", searchedCities[i])
       .addClass("btn btn-primary");
-    $(".search-history-container").append(searchHistoryBtn);
+
+    searchedHistoryList.append(searchHistoryBtn);
+
+    $(".search-history-container").append(searchedHistoryList);
   }
 };
 
@@ -207,5 +213,5 @@ var formHandler = function (e) {
   $("#city-input").val("");
 };
 
-$("#search-form button").on("click", formHandler);
-loadCity();
+$("#search-form").on("submit", formHandler);
+
