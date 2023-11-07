@@ -179,33 +179,39 @@ var saveCity = function (city) {
     localStorage.setItem("cities", JSON.stringify(searchedCities));
   }
 };
-var loadCity = function () {
+
+var loadRecentCities = function () {
   searchedCities = JSON.parse(localStorage.getItem("cities")) || [];
-  // console.log(savedCities);
-  for (var i = 0; i < searchedCities.length; i++) {
-    var searchedHistoryList = $("<li>").addClass(
-      "mt-1 list-group-item border-0"
-    );
-    var searchHistoryBtn = $("<button>")
-      .text(searchedCities[i])
-      .attr("value", searchedCities[i])
-      .addClass("btn btn-primary");
 
-    searchedHistoryList.append(searchHistoryBtn);
-
-    $(".search-history-container").append(searchedHistoryList);
-  }
+  // for (var i = 0; i < searchedCities.length; i++) {
+  //   console.log(searchedCities[i]);
+  // }
 };
 
+var recentSearch = function (city) {
+  var listEl = $("<button>")
+    .addClass("list-group-item list-group-item")
+    .text(city);
+  // store in localStorage.
+    saveCity(city);
+
+  $(".search-history-container").on("click", function (event) {
+    // console.log(event.target.tagName);
+    if (event.target.tagName == "BUTTON") {
+      geoCoding(event.target.textContent);
+    }
+  });
+
+  $(".search-history-container").append(listEl);
+};
 // Extract the search city name from input form.
 var formHandler = function (e) {
   e.preventDefault();
   var cityInput = $("#city-input").val().trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
 
-  // store in localStorage.
-  saveCity(cityInput);
-
+  // create a list of recent city searches on the DOM.
+  recentSearch(cityInput);
   // use fetch api to find weather details.
   geoCoding(cityInput);
 
@@ -215,3 +221,4 @@ var formHandler = function (e) {
 
 $("#search-form").on("submit", formHandler);
 
+loadRecentCities();
