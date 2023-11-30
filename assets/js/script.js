@@ -2,6 +2,7 @@ var currentWeatherContainerEl = $(".current-weather-container");
 var fiveDayForecastContainerEl = $(".five-day-container .row");
 var fiveDaySectionTitle = document.querySelector(".five-day-container h4");
 var searchedCities = [];
+var searchHistory = [];
 
 // Fetch geographic coordinates [lat, lon] by using name of location (city name or area name).
 var geoCoding = function (searchedCity) {
@@ -179,21 +180,13 @@ var saveCity = function (city) {
     localStorage.setItem("cities", JSON.stringify(searchedCities));
   }
 };
-
-var loadRecentCities = function () {
-  searchedCities = JSON.parse(localStorage.getItem("cities")) || [];
-
-  // for (var i = 0; i < searchedCities.length; i++) {
-  //   console.log(searchedCities[i]);
-  // }
-};
-
+// create a DOM list element of recently searched cities.
 var recentSearch = function (city) {
   var listEl = $("<button>")
     .addClass("list-group-item list-group-item")
     .text(city);
   // store in localStorage.
-    saveCity(city);
+  saveCity(city);
 
   $(".search-history-container").on("click", function (event) {
     // console.log(event.target.tagName);
@@ -203,6 +196,14 @@ var recentSearch = function (city) {
   });
 
   $(".search-history-container").append(listEl);
+};
+
+var loadRecentCities = function () {
+  searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
+  // console.log(searchHistory);
+  // for (var i = 0; i < searchHistory.length; i++) {
+  //   recentSearch(searchHistory[i]);
+  // }
 };
 // Extract the search city name from input form.
 var formHandler = function (e) {
