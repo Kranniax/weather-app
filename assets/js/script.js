@@ -198,12 +198,24 @@ var recentSearch = function (city) {
   $(".search-history-container").append(listEl);
 };
 
+// loads prior search history. 
 var loadRecentCities = function () {
   searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
-  // console.log(searchHistory);
-  // for (var i = 0; i < searchHistory.length; i++) {
-  //   recentSearch(searchHistory[i]);
-  // }
+  console.log(searchHistory);
+  for (var i = 0; i < searchHistory.length; i++) {
+    var listEl = $("<button>")
+      .addClass("list-group-item list-group-item")
+      .text(searchHistory[i]);
+
+    $(".search-history-container").on("click", function (event) {
+      // console.log(event.target.tagName);
+      if (event.target.tagName == "BUTTON") {
+        geoCoding(event.target.textContent);
+      }
+    });
+
+    $(".search-history-container").append(listEl);
+  }
 };
 // Extract the search city name from input form.
 var formHandler = function (e) {
@@ -211,10 +223,10 @@ var formHandler = function (e) {
   var cityInput = $("#city-input").val().trim();
   cityInput = cityInput.charAt(0).toUpperCase() + cityInput.slice(1);
 
-  // create a list of recent city searches on the DOM.
-  recentSearch(cityInput);
   // use fetch api to find weather details.
   geoCoding(cityInput);
+  // create a list of recent city searches on the DOM.
+  recentSearch(cityInput);
 
   // clear input field after submit.
   $("#city-input").val("");
