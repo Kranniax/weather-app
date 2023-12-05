@@ -7,7 +7,7 @@ var searchHistory = [];
 // Fetch geographic coordinates [lat, lon] by using name of location (city name or area name).
 var geoCoding = function (searchedCity) {
   fetch(
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
       searchedCity +
       "&appid=379d1420e9fea3af7ba71fd81914bc2f"
   ).then(function (response) {
@@ -201,7 +201,7 @@ var recentSearch = function (city) {
 // loads prior search history. 
 var loadRecentCities = function () {
   searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
-  console.log(searchHistory);
+  // console.log(searchHistory);
   for (var i = 0; i < searchHistory.length; i++) {
     var listEl = $("<button>")
       .addClass("list-group-item list-group-item")
