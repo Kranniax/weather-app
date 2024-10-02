@@ -19,14 +19,21 @@ var geoCoding = function (searchedCity) {
 
 // Using the One Call API 3.0 search for the Citie's current and five day forcast.
 var citySearch = function (data, city) {
-  fetch(
+  var oldURL =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-      data[0].lat +
-      "&lon=" +
-      data[0].lon +
-      "&exclude={part}&units=imperial&appid=379d1420e9fea3af7ba71fd81914bc2f"
-  ).then(function (response) {
+    data[0].lat +
+    "&lon=" +
+    data[0].lon +
+    "&exclude={part}&units=imperial&appid=379d1420e9fea3af7ba71fd81914bc2f";
+
+  // var newURL =
+  //   "https://api.openweathermap.org/data/2.5/weather?q=" +
+  //   city +
+  //   "&appid=379d1420e9fea3af7ba71fd81914bc2f&units=imperial&exclude={part}";
+  fetch(oldURL).then(function (response) {
     response.json().then(function (data) {
+      console.log(data);
+
       currentWeather(data, city);
       fiveDayForecast(data);
     });
@@ -198,7 +205,7 @@ var recentSearch = function (city) {
   $(".search-history-container").append(listEl);
 };
 
-// loads prior search history. 
+// loads prior search history.
 var loadRecentCities = function () {
   searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
   // console.log(searchHistory);
