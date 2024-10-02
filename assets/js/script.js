@@ -20,7 +20,7 @@ var geoCoding = function (searchedCity) {
 // Using the One Call API 3.0 search for the Citie's current and five day forcast.
 var citySearch = function (data, city) {
   var url =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    "https://api.openweathermap.org/data/3.0/onecall?lat=" +
     data[0].lat +
     "&lon=" +
     data[0].lon +
@@ -28,8 +28,6 @@ var citySearch = function (data, city) {
 
   fetch(url).then(function (response) {
     response.json().then(function (data) {
-      console.log(data);
-
       currentWeather(data, city);
       fiveDayForecast(data);
     });
